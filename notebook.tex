@@ -1,0 +1,1206 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Lab1-pythonpandas}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Lab 1. An Introduction to Pandas and
+Python}\label{lab-1.-an-introduction-to-pandas-and-python}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} The \PYZpc{}... is an iPython thing, and is not part of the Python language.}
+        \PY{c+c1}{\PYZsh{} In this case we\PYZsq{}re just telling the plotting library to draw things on}
+        \PY{c+c1}{\PYZsh{} the notebook, instead of on a separate window.}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+        \PY{c+c1}{\PYZsh{}this line above prepares IPython notebook for working with matplotlib}
+        
+        \PY{c+c1}{\PYZsh{} See all the \PYZdq{}as ...\PYZdq{} contructs? They\PYZsq{}re just aliasing the package names.}
+        \PY{c+c1}{\PYZsh{} That way we can call methods like plt.plot() instead of matplotlib.pyplot.plot().}
+        
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} \PY{c+c1}{\PYZsh{} imports a fast numerical programming library}
+        \PY{k+kn}{import} \PY{n+nn}{scipy} \PY{k}{as} \PY{n+nn}{sp} \PY{c+c1}{\PYZsh{}imports stats functions, amongst other things}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib} \PY{k}{as} \PY{n+nn}{mpl} \PY{c+c1}{\PYZsh{} this actually imports matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{cm} \PY{k}{as} \PY{n+nn}{cm} \PY{c+c1}{\PYZsh{}allows us easy access to colormaps}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} \PY{c+c1}{\PYZsh{}sets up plotting under plt}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} \PY{c+c1}{\PYZsh{}lets us handle data as dataframes}
+        \PY{c+c1}{\PYZsh{}sets up pandas table display}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.notebook\PYZus{}repr\PYZus{}html}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns} \PY{c+c1}{\PYZsh{}sets up styles and gives us more plotting options}
+\end{Verbatim}
+
+
+    Python depends on packages for most of its functionality; these can be
+either built-in (such as sys), or third-party (like all the packages
+below). Either way you need to import the packages you need before using
+them.
+
+    \subsection{The Notebook}\label{the-notebook}
+
+Look up http:/www.google.com Lets eat a burrito.
+\(\alpha = \frac{\beta}{\gamma}\)
+
+Longer:
+
+\[\alpha = \frac{\beta}{\gamma}\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  an item
+\item
+  another item
+\item
+  i like items
+\end{enumerate}
+
+    \subsection{Pandas}\label{pandas}
+
+    Get Cheatsheet:
+
+from
+https://drive.google.com/folderview?id=0ByIrJAE4KMTtaGhRcXkxNHhmY2M\&usp=sharing
+
+We read in some data from a CSV file. CSV files can be output by any
+spreadsheet software, and are plain text, so make a great way to share
+data. This dataset is from Goodreads: i scraped the highest regarded
+(according to Goodread's proprietary algorithm) books on that site.
+Ypu'll see how to do such a scraping in the next lab.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{all.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}
+                       \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{isbn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{booktype}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{author\PYZus{}url}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre\PYZus{}urls}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dir}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+        \PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}    rating review\_count        isbn         booktype                                         author\_url    year                                         genre\_urls                                                dir rating\_count                                               name
+        0    4.40       136455  0439023483  good\_reads:book  https://www.goodreads.com/author/show/153394.S{\ldots}  2008.0  /genres/young-adult|/genres/science-fiction|/g{\ldots}                dir01/2767052-the-hunger-games.html      2958974            The Hunger Games (The Hunger Games, \#1)
+        1    4.41        16648  0439358078  good\_reads:book  https://www.goodreads.com/author/show/1077326{\ldots}  2003.0  /genres/fantasy|/genres/young-adult|/genres/fi{\ldots}  dir01/2.Harry\_Potter\_and\_the\_Order\_of\_the\_Phoe{\ldots}      1284478  Harry Potter and the Order of the Phoenix (Har{\ldots}
+        2    3.56        85746  0316015849  good\_reads:book  https://www.goodreads.com/author/show/941441.S{\ldots}  2005.0  /genres/young-adult|/genres/fantasy|/genres/ro{\ldots}                          dir01/41865.Twilight.html      2579564                            Twilight (Twilight, \#1)
+        3    4.23        47906  0061120081  good\_reads:book  https://www.goodreads.com/author/show/1825.Har{\ldots}  1960.0  /genres/classics|/genres/fiction|/genres/histo{\ldots}              dir01/2657.To\_Kill\_a\_Mockingbird.html      2078123                              To Kill a Mockingbird
+        4    4.23        34772  0679783261  good\_reads:book  https://www.goodreads.com/author/show/1265.Jan{\ldots}  1813.0  /genres/classics|/genres/fiction|/genres/roman{\ldots}                dir01/1885.Pride\_and\_Prejudice.html      1388992                                Pride and Prejudice
+\end{Verbatim}
+            
+    Notice we have a table! A spreadsheet! And it indexed the rows. Pandas
+(borrowing from R) calls it a DataFrame. Lets see the types of the
+columns...
+
+\texttt{df}, in python parlance, is an \textbf{instance} of the
+\texttt{pd.DataFrame} class, created by calling the
+\texttt{pd.read\_csv} function, which cllas the DataFrame constructor
+inside of it. If you dont understand this sentence, dont worry, it will
+become clearer later. What you need to take away is that \texttt{df} is
+a dataframe object, and it has \textbf{methods}, or functions belonging
+to it, which allow it to do things. For example \texttt{df.head()} is a
+method that shows the first 5 rows of the dataframe.
+
+\begin{figure}
+\centering
+\includegraphics{pandastruct.png}
+\caption{}
+\end{figure}
+
+\subsubsection{The basics}\label{the-basics}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} rating          float64
+        review\_count     object
+        isbn             object
+        booktype         object
+        author\_url       object
+        year            float64
+        genre\_urls       object
+        dir              object
+        rating\_count     object
+        name             object
+        dtype: object
+\end{Verbatim}
+            
+    The shape of the object is:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} (6000, 10)
+\end{Verbatim}
+            
+    6000 rows times 10 columns. A spredsheet is a table is a matrix. How can
+we access members of this \textbf{tuple} (brackets like so:() )
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} (6000, 10)
+\end{Verbatim}
+            
+    These are the column names.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} Index(['rating', 'review\_count', 'isbn', 'booktype', 'author\_url', 'year', 'genre\_urls', 'dir', 'rating\_count', 'name'], dtype='object')
+\end{Verbatim}
+            
+    As the diagram above shows, pandas considers a table (dataframe) as a
+pasting of many "series" together, horizontally.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{rating}\PY{p}{)}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} (pandas.core.series.Series, pandas.core.frame.DataFrame)
+\end{Verbatim}
+            
+    \subsubsection{Querying}\label{querying}
+
+A spreadsheet is useless if you cant dice/sort/etc it. Here we look for
+all books with a rating less than 3.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{df}\PY{o}{.}\PY{n}{rating} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 0       False
+        1       False
+        2       False
+        3       False
+        4       False
+        5       False
+        6       False
+        7       False
+        8       False
+        9       False
+        10      False
+        11      False
+        12      False
+        13      False
+        14      False
+        15      False
+        16      False
+        17      False
+        18      False
+        19      False
+        20      False
+        21      False
+        22      False
+        23      False
+        24      False
+        25      False
+        26      False
+        27      False
+        28      False
+        29      False
+                {\ldots}  
+        5970    False
+        5971    False
+        5972    False
+        5973    False
+        5974    False
+        5975    False
+        5976    False
+        5977    False
+        5978    False
+        5979     True
+        5980    False
+        5981    False
+        5982    False
+        5983    False
+        5984    False
+        5985    False
+        5986    False
+        5987    False
+        5988    False
+        5989    False
+        5990    False
+        5991    False
+        5992    False
+        5993    False
+        5994    False
+        5995    False
+        5996    False
+        5997    False
+        5998    False
+        5999    False
+        Name: rating, Length: 6000, dtype: bool
+\end{Verbatim}
+            
+    This gives us \texttt{True}s and \texttt{False}s. Such a series is
+called a mask. If we count the number of \texttt{True}s, and divide by
+the total, we'll get the fraction of ratings \(\lt\) 3. To do this
+numerically see this:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{rating} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 4
+\end{Verbatim}
+            
+    Why did that work?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n+nb}{print} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{*}\PY{k+kc}{True}\PY{p}{,} \PY{l+m+mi}{1}\PY{o}{*}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1 0
+
+    \end{Verbatim}
+
+    So we ought to be able to do this
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{rating} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}\PY{p}{)}\PY{o}{/}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 0.0006666666666666666
+\end{Verbatim}
+            
+    But we get a 0? Why? In Python 2.x division is \textbf{integer division}
+by default. So one can fix by converting the \texttt{df.shape{[}0{]}} to
+a float
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{rating} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}\PY{p}{)}\PY{o}{/}\PY{n+nb}{float}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} 0.0006666666666666666
+\end{Verbatim}
+            
+    Notice that you could just find the average since the \texttt{True}s map
+to 1s.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{rating} \PY{o}{\PYZlt{}} \PY{l+m+mf}{3.0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 0.0006666666666666666
+\end{Verbatim}
+            
+    Or directly, in Pandas, which works since
+\texttt{df.rating\ \textless{}\ 3} is a pandas Series.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{rating} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 0.0006666666666666666
+\end{Verbatim}
+            
+    \subsubsection{Filtering}\label{filtering}
+
+Here are two ways to get a filtered dataframe
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating \PYZgt{} 4.5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}       rating review\_count        isbn         booktype                                         author\_url    year                                         genre\_urls                                                dir rating\_count                                               name
+         17      4.58         1314  0345538374  good\_reads:book  https://www.goodreads.com/author/show/656983.J{\ldots}  1973.0  /genres/fantasy|/genres/classics|/genres/scien{\ldots}       dir01/30.J\_R\_R\_Tolkien\_4\_Book\_Boxed\_Set.html        68495                    J.R.R. Tolkien 4-Book Boxed Set
+         162     4.55        15777  075640407X  good\_reads:book  https://www.goodreads.com/author/show/108424.P{\ldots}  2007.0                    /genres/fantasy|/genres/fiction             dir02/186074.The\_Name\_of\_the\_Wind.html       210018  The Name of the Wind (The Kingkiller Chronicle{\ldots}
+         222     4.53        15256  055357342X  good\_reads:book  https://www.goodreads.com/author/show/346732.G{\ldots}  2000.0  /genres/fantasy|/genres/fiction|/genres/fantas{\ldots}                 dir03/62291.A\_Storm\_of\_Swords.html       327992     A Storm of Swords (A Song of Ice and Fire, \#3)
+         242     4.53         5404  0545265355  good\_reads:book  https://www.goodreads.com/author/show/153394.S{\ldots}  2010.0  /genres/young-adult|/genres/fiction|/genres/fa{\ldots}  dir03/7938275-the-hunger-games-trilogy-boxset{\ldots}       102330  The Hunger Games Trilogy Boxset (The Hunger Ga{\ldots}
+         249     4.80          644  0740748475  good\_reads:book  https://www.goodreads.com/author/show/13778.Bi{\ldots}  2005.0  /genres/sequential-art|/genres/comics|/genres/{\ldots}    dir03/24812.The\_Complete\_Calvin\_and\_Hobbes.html        22674                     The Complete Calvin and Hobbes
+         284     4.58        15195  1406321346  good\_reads:book  https://www.goodreads.com/author/show/150038.C{\ldots}  2013.0  /genres/fantasy|/genres/young-adult|/genres/fa{\ldots}             dir03/18335634-clockwork-princess.html       130161      Clockwork Princess (The Infernal Devices, \#3)
+         304     4.54          572  0140259449  good\_reads:book  https://www.goodreads.com/author/show/1265.Jan{\ldots}  1933.0  /genres/classics|/genres/fiction|/genres/roman{\ldots}               dir04/14905.The\_Complete\_Novels.html        17539                                The Complete Novels
+         386     4.55         8820  0756404738  good\_reads:book  https://www.goodreads.com/author/show/108424.P{\ldots}  2011.0  /genres/fantasy|/genres/fantasy|/genres/epic-f{\ldots}             dir04/1215032.The\_Wise\_Man\_s\_Fear.html       142499  The Wise Man's Fear (The Kingkiller Chronicle,{\ldots}
+         400     4.53         9292  1423140605  good\_reads:book  https://www.goodreads.com/author/show/15872.Ri{\ldots}  2012.0  /genres/fantasy|/genres/young-adult|/genres/fa{\ldots}             dir05/12127750-the-mark-of-athena.html       128412     The Mark of Athena (The Heroes of Olympus, \#3)
+         475     4.57          824  1416997857  good\_reads:book  https://www.goodreads.com/author/show/150038.C{\ldots}  2009.0  /genres/fantasy|/genres/young-adult|/genres/fa{\ldots}  dir05/6485421-the-mortal-instruments-boxed-set{\ldots}        39720  The Mortal Instruments Boxed Set (The Mortal I{\ldots}
+         483     4.59         2622  0312362153  good\_reads:book  https://www.goodreads.com/author/show/4430.She{\ldots}  2008.0  /genres/romance|/genres/paranormal-romance|/ge{\ldots}                         dir05/2299110.Acheron.html        35028                          Acheron (Dark-Hunter, \#8)
+         554     4.54         4809  0385341679  good\_reads:book  https://www.goodreads.com/author/show/48206.Ka{\ldots}  2011.0  /genres/fantasy|/genres/urban-fantasy|/genres/{\ldots}                     dir06/7304203-shadowfever.html        52812                            Shadowfever (Fever, \#5)
+         577     4.60         5732  0765326353  good\_reads:book  https://www.goodreads.com/author/show/38550.Br{\ldots}  2010.0  /genres/science-fiction-fantasy|/genres/fantas{\ldots}                dir06/7235533-the-way-of-kings.html        76551      The Way of Kings (The Stormlight Archive, \#1)
+         620     4.54         7767  1423146727  good\_reads:book  https://www.goodreads.com/author/show/15872.Ri{\ldots}  2013.0  /genres/fantasy|/genres/young-adult|/genres/fa{\ldots}             dir07/12127810-the-house-of-hades.html        72082     The House of Hades (The Heroes of Olympus, \#4)
+         840     4.57          431  1423113497  good\_reads:book  https://www.goodreads.com/author/show/15872.Ri{\ldots}  2008.0  /genres/fantasy|/genres/young-adult|/genres/fa{\ldots}  dir09/3165162-percy-jackson-and-the-olympians-{\ldots}        22937  Percy Jackson and the Olympians Boxed Set (Per{\ldots}
+         883     4.58          558  0140286802  good\_reads:book  https://www.goodreads.com/author/show/500.Jorg{\ldots}  1998.0  /genres/short-stories|/genres/literature|/genr{\ldots}                dir09/17961.Collected\_Fictions.html        12596                                 Collected Fictions
+         911     4.85           26  1491732954  good\_reads:book  https://www.goodreads.com/author/show/8189303{\ldots}  2014.0                                    /genres/fiction             dir10/22242097-honor-and-polygamy.html           97                                 Honor and Polygamy
+         935     4.64          148  1595142711  good\_reads:book  https://www.goodreads.com/author/show/137902.R{\ldots}  2009.0  /genres/paranormal|/genres/vampires|/genres/yo{\ldots}      dir10/6339989-vampire-academy-collection.html        21743  Vampire Academy Collection (Vampire Academy, \#{\ldots}
+         938     4.51        11011  1481426303  good\_reads:book  https://www.goodreads.com/author/show/150038.C{\ldots}  2014.0  /genres/fantasy|/genres/young-adult|/genres/fa{\ldots}           dir10/8755785-city-of-heavenly-fire.html        69924  City of Heavenly Fire (The Mortal Instruments,{\ldots}
+         953     4.56           27  1477276068  good\_reads:book  https://www.goodreads.com/author/show/6621980{\ldots}  2012.0                                                NaN              dir10/16243767-crossing-the-seas.html           90                                  Crossing the Seas
+         958     4.57        38199  0545010225  good\_reads:book  https://www.goodreads.com/author/show/1077326{\ldots}  2007.0  /genres/fantasy|/genres/young-adult|/genres/fa{\ldots}  dir10/136251.Harry\_Potter\_and\_the\_Deathly\_Hall{\ldots}      1245866  Harry Potter and the Deathly Hallows (Harry Po{\ldots}
+         1033    4.56         1304  0007119550  good\_reads:book  https://www.goodreads.com/author/show/346732.G{\ldots}  2000.0  /genres/fiction|/genres/fantasy|/genres/epic-f{\ldots}                dir11/147915.A\_Storm\_of\_Swords.html        41161   A Storm of Swords (A Song of Ice and Fire, \#3-2)
+         1109    4.70           23         NaN  good\_reads:book  https://www.goodreads.com/author/show/7488658{\ldots}  2013.0                                    /genres/romance           dir12/19181419-a-bird-without-wings.html           56                               A Bird Without Wings
+         1127    4.52          644  0141183047  good\_reads:book  https://www.goodreads.com/author/show/7816.Fer{\ldots}  1982.0  /genres/poetry|/genres/fiction|/genres/philoso{\ldots}              dir12/45974.The\_Book\_of\_Disquiet.html         7463                               The Book of Disquiet
+         1151    4.64           84  1491877928  good\_reads:book  https://www.goodreads.com/author/show/7271860{\ldots}  2013.0  /genres/war|/genres/historical-fiction|/genres{\ldots}  dir12/18501652-the-guardian-of-secrets-and-her{\ldots}          167       The Guardian of Secrets and Her Deathly Pact
+         1186    4.51         4853  1619630621  good\_reads:book  https://www.goodreads.com/author/show/3433047{\ldots}  2013.0  /genres/fantasy|/genres/young-adult|/genres/ro{\ldots}              dir12/17167166-crown-of-midnight.html        34142            Crown of Midnight (Throne of Glass, \#2)
+         1202    4.59         1260  0310902711  good\_reads:book  https://www.goodreads.com/author/show/5158478{\ldots}  1972.0  /genres/religion|/genres/christian|/genres/non{\ldots}                       dir13/280111.Holy\_Bible.html        25584                                         Holy Bible
+         1260    4.60         1943  0842377506  good\_reads:book  https://www.goodreads.com/author/show/6492.Fra{\ldots}  1993.0  /genres/christian-fiction|/genres/historical-f{\ldots}               dir13/95617.A\_Voice\_in\_the\_Wind.html        37923         A Voice in the Wind (Mark of the Lion, \#1)
+         1268    4.52          215  1557091528  good\_reads:book  https://www.goodreads.com/author/show/63859.Ja{\ldots}  1787.0  /genres/history|/genres/non-fiction|/genres/po{\ldots}  dir13/89959.The\_Constitution\_of\_the\_United\_Sta{\ldots}        12894   The Constitution of the United States of America
+         1300    4.61           24  1499227299  good\_reads:book  https://www.goodreads.com/author/show/7414345{\ldots}  2014.0  /genres/paranormal|/genres/vampires|/genres/pa{\ldots}        dir14/22090082-vampire-princess-rising.html          128  Vampire Princess Rising (The Winters Family Sa{\ldots}
+         {\ldots}      {\ldots}          {\ldots}         {\ldots}              {\ldots}                                                {\ldots}     {\ldots}                                                {\ldots}                                                {\ldots}          {\ldots}                                                {\ldots}
+         5532    4.86            4  1477504540  good\_reads:book  https://www.goodreads.com/author/show/5989528{\ldots}  2013.0                                                NaN          dir56/17695243-call-of-the-lost-ages.html            7                              Call Of The Lost Ages
+         5549    4.62           13  0882408704  good\_reads:book  https://www.goodreads.com/author/show/947.Will{\ldots}  1899.0  /genres/classics|/genres/fiction|/genres/poetr{\ldots}  dir56/17134346-the-complete-works-of-william-s{\ldots}          217          The Complete Works of William Shakespeare
+         5557    4.61           14         NaN  good\_reads:book  https://www.goodreads.com/author/show/32401.Al{\ldots}  2006.0                /genres/fantasy|/genres/young-adult          dir56/13488552-the-books-of-pellinor.html          394                              The Books of Pellinor
+         5563    4.70           30         NaN  good\_reads:book  https://www.goodreads.com/author/show/7153266{\ldots}  2014.0                                  /genres/childrens                dir56/20445451-children-s-book.html           57                                    Children's book
+         5564    5.00            9         NaN  good\_reads:book  https://www.goodreads.com/author/show/7738947{\ldots}  2014.0                  /genres/romance|/genres/new-adult                      dir56/21902777-untainted.html           14               Untainted (Photographer Trilogy, \#3)
+         5584    4.75            3  1481959824  good\_reads:book  https://www.goodreads.com/author/show/5100743{\ldots}  2013.0                                                NaN                  dir56/17606460-why-not-world.html            8                                      Why Not-World
+         5588    4.66          190         NaN  good\_reads:book  https://www.goodreads.com/author/show/4942228{\ldots}  2011.0  /genres/romance|/genres/m-m-romance|/genres/sc{\ldots}                           dir56/11737700-fade.html          996               Fade (In the company of shadows, \#4)
+         5591    4.58           31  1500118680  good\_reads:book  https://www.goodreads.com/author/show/7738947{\ldots}  2014.0                  /genres/romance|/genres/new-adult                  dir56/22023804-logan-s-story.html           45                  Logan's Story (Sand \& Clay, \#0.5)
+         5601    4.66          312  0842384898  good\_reads:book  https://www.goodreads.com/author/show/5158478{\ldots}  1902.0  /genres/christian|/genres/religion|/genres/non{\ldots}                       dir57/930470.Holy\_Bible.html         2666                                         Holy Bible
+         5607    4.66          513  0007444397  good\_reads:book  https://www.goodreads.com/author/show/4659154{\ldots}  2011.0              /genres/non-fiction|/genres/biography                  dir57/11792612-dare-to-dream.html         5572                      Dare to Dream (100\% Official)
+         5619    4.52          462  0991190920  good\_reads:book  https://www.goodreads.com/author/show/7092218{\ldots}  2014.0  /genres/fantasy|/genres/paranormal|/genres/fai{\ldots}               dir57/18188649-escaping-destiny.html         3795          Escaping Destiny (The Fae Chronicles, \#3)
+         5635    4.54          958  0778315703  good\_reads:book  https://www.goodreads.com/author/show/4480131{\ldots}  2013.0  /genres/erotica|/genres/bdsm|/genres/adult-fic{\ldots}                   dir57/17251444-the-mistress.html         4869            The Mistress (The Original Sinners, \#4)
+         5642    4.70          158  1417642165  good\_reads:book  https://www.goodreads.com/author/show/13778.Bi{\ldots}  1992.0  /genres/sequential-art|/genres/comics|/genres/{\ldots}                 dir57/70487.Calvin\_and\_Hobbes.html         9224                                  Calvin and Hobbes
+         5657    4.80            8  1469908530  good\_reads:book  https://www.goodreads.com/author/show/4695431{\ldots}  2012.0                                    /genres/fantasy  dir57/15734769-myrtle-mae-and-the-mirror-in-th{\ldots}           10  Myrtle Mae and the Mirror in the Attic (The Ma{\ldots}
+         5665    4.53           61         NaN  good\_reads:book  https://www.goodreads.com/author/show/7738947{\ldots}  2014.0  /genres/romance|/genres/new-adult|/genres/myst{\ldots}               dir57/20975446-tainted-pictures.html          103        Tainted Pictures (Photographer Trilogy, \#2)
+         5683    4.56          204         NaN  good\_reads:book  https://www.goodreads.com/author/show/3097905{\ldots}     NaN  /genres/fantasy|/genres/young-adult|/genres/ro{\ldots}                  dir57/12474623-tiger-s-dream.html          895                 Tiger's Dream (The Tiger Saga, \#5)
+         5692    5.00            0         NaN  good\_reads:book  https://www.goodreads.com/author/show/5989528{\ldots}  2012.0                                                NaN  dir57/14288412-abstraction-in-theory---laws-of{\ldots}            6  Abstraction In Theory - Laws Of Physical Trans{\ldots}
+         5716    4.67           34  0810117134  good\_reads:book  https://www.goodreads.com/author/show/205563.M{\ldots}  1970.0  /genres/classics|/genres/fiction|/genres/histo{\ldots}                    dir58/1679497.The\_Fortress.html         1335                                       The Fortress
+         5717    4.71            4         NaN  good\_reads:book  https://www.goodreads.com/author/show/5838022{\ldots}  2012.0                                                NaN              dir58/13741511-american-amaranth.html           14                                  American Amaranth
+         5718    4.60          656  1613725132  good\_reads:book  https://www.goodreads.com/author/show/1122775{\ldots}  2012.0  /genres/romance|/genres/m-m-romance|/genres/ro{\ldots}                dir58/13246997-armed-dangerous.html         5268                  Armed \& Dangerous (Cut \& Run, \#5)
+         5726    4.55          106  1594170347  good\_reads:book  https://www.goodreads.com/author/show/5158478{\ldots}  1952.0  /genres/religion|/genres/reference|/genres/rel{\ldots}                       dir58/147635.Holy\_Bible.html         1750                                         Holy Bible
+         5729    4.83           16         NaN  good\_reads:book  https://www.goodreads.com/author/show/7058502{\ldots}  2014.0                                                NaN                     dir58/22312293-the-keeper.html           29                        The Keeper (The Keeper, \#5)
+         5753    4.61          811  1937551865  good\_reads:book  https://www.goodreads.com/author/show/1122775{\ldots}  2013.0  /genres/romance|/genres/m-m-romance|/genres/ro{\ldots}                    dir58/16159276-touch-geaux.html         4212                      Touch \& Geaux (Cut \& Run, \#7)
+         5764    4.54          228         NaN  good\_reads:book  https://www.goodreads.com/author/show/2112402{\ldots}  2013.0  /genres/non-fiction|/genres/self-help|/genres/{\ldots}                 dir58/18479831-staying-strong.html         2343                                     Staying Strong
+         5778    4.63            0         NaN  good\_reads:book  https://www.goodreads.com/author/show/4808225{\ldots}  2010.0                                                NaN                      dir58/11187937-un-spoken.html           19                                        (Un) Spoken
+         5806    4.57          121  0679777458  good\_reads:book  https://www.goodreads.com/author/show/8361.Dor{\ldots}  1966.0  /genres/historical-fiction|/genres/fiction|/ge{\ldots}           dir59/351211.The\_Disorderly\_Knights.html         2177  The Disorderly Knights (The Lymond Chronicles,{\ldots}
+         5873    4.55          103  144247372X  good\_reads:book  https://www.goodreads.com/author/show/2876763{\ldots}  2012.0  /genres/fantasy|/genres/paranormal|/genres/ang{\ldots}    dir59/14367071-the-complete-hush-hush-saga.html         2869                       The Complete Hush, Hush Saga
+         5874    4.78           18  2851944371  good\_reads:book  https://www.goodreads.com/author/show/318835.O{\ldots}  1972.0  /genres/poetry|/genres/fiction|/genres/nobel-p{\ldots}                   dir59/2014000.Le\_Monogramme.html          565                                      Le Monogramme
+         5880    4.61          123         NaN  good\_reads:book  https://www.goodreads.com/author/show/4942228{\ldots}  2010.0  /genres/romance|/genres/m-m-romance|/genres/sc{\ldots}                 dir59/10506860-the-interludes.html         1031     The Interludes (In the company of shadows, \#3)
+         5957    4.72          104  178048044X  good\_reads:book  https://www.goodreads.com/author/show/20248.J\_{\ldots}  2010.0  /genres/romance|/genres/paranormal|/genres/vam{\ldots}            dir60/10780042-j-r-ward-collection.html         1788                              J. R. Ward Collection
+         
+         [224 rows x 10 columns]
+\end{Verbatim}
+            
+    Here we create a mask and use it to "index" into the dataframe to get
+the rows we want.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{year} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:}       rating review\_count        isbn         booktype                                         author\_url    year                                         genre\_urls                                                dir rating\_count                                  name
+         47      3.68         5785  0143039954  good\_reads:book    https://www.goodreads.com/author/show/903.Homer  -800.0  /genres/classics|/genres/fiction|/genres/poetr{\ldots}                        dir01/1381.The\_Odyssey.html       560248                           The Odyssey
+         246     4.01          365  0147712556  good\_reads:book    https://www.goodreads.com/author/show/903.Homer  -800.0  /genres/classics|/genres/fantasy|/genres/mytho{\ldots}              dir03/1375.The\_Iliad\_The\_Odyssey.html        35123                 The Iliad/The Odyssey
+         455     3.85         1499  0140449140  good\_reads:book    https://www.goodreads.com/author/show/879.Plato  -380.0  /genres/philosophy|/genres/classics|/genres/no{\ldots}                      dir05/30289.The\_Republic.html        82022                          The Republic
+         596     3.77         1240  0679729526  good\_reads:book   https://www.goodreads.com/author/show/919.Virgil   -29.0  /genres/classics|/genres/poetry|/genres/fictio{\ldots}                        dir06/12914.The\_Aeneid.html        60308                            The Aeneid
+         629     3.64         1231  1580495931  good\_reads:book  https://www.goodreads.com/author/show/1002.Sop{\ldots}  -429.0  /genres/classics|/genres/plays|/genres/drama|/{\ldots}                        dir07/1554.Oedipus\_Rex.html        93192                           Oedipus Rex
+         674     3.92         3559  1590302257  good\_reads:book  https://www.goodreads.com/author/show/1771.Sun{\ldots}  -512.0  /genres/non-fiction|/genres/politics|/genres/c{\ldots}                    dir07/10534.The\_Art\_of\_War.html       114619                        The Art of War
+         746     4.06         1087  0140449183  good\_reads:book  https://www.goodreads.com/author/show/5158478{\ldots}  -500.0  /genres/classics|/genres/spirituality|/genres/{\ldots}                 dir08/99944.The\_Bhagavad\_Gita.html        31634                     The Bhagavad Gita
+         777     3.52         1038  1580493882  good\_reads:book  https://www.goodreads.com/author/show/1002.Sop{\ldots}  -442.0  /genres/drama|/genres/fiction|/genres/classics{\ldots}                           dir08/7728.Antigone.html        49084                              Antigone
+         1233    3.94          704  015602764X  good\_reads:book  https://www.goodreads.com/author/show/1002.Sop{\ldots}  -400.0  /genres/classics|/genres/plays|/genres/drama|/{\ldots}                  dir13/1540.The\_Oedipus\_Cycle.html        36008                     The Oedipus Cycle
+         1397    4.03          890  0192840509  good\_reads:book  https://www.goodreads.com/author/show/12452.Aesop  -560.0  /genres/classics|/genres/childrens|/genres/lit{\ldots}                    dir14/21348.Aesop\_s\_Fables.html        71259                        Aesop's Fables
+         1398    3.60         1644  0141026286  good\_reads:book  https://www.goodreads.com/author/show/5158478{\ldots} -1500.0  /genres/religion|/genres/literature|/genres/an{\ldots}             dir14/19351.The\_Epic\_of\_Gilgamesh.html        42026                 The Epic of Gilgamesh
+         1428    3.80          539  0486275485  good\_reads:book  https://www.goodreads.com/author/show/973.Euri{\ldots}  -431.0  /genres/classics|/genres/plays|/genres/drama|/{\ldots}                            dir15/752900.Medea.html        29858                                 Medea
+         1815    3.96          493  0140443339  good\_reads:book  https://www.goodreads.com/author/show/990.Aesc{\ldots}  -458.0  /genres/classics|/genres/plays|/genres/drama|/{\ldots}                       dir19/1519.The\_Oresteia.html        18729                          The Oresteia
+         1882    4.02          377  0872205541  good\_reads:book    https://www.goodreads.com/author/show/879.Plato  -400.0  /genres/philosophy|/genres/classics|/genres/no{\ldots}   dir19/22632.The\_Trial\_and\_Death\_of\_Socrates.html        18712       The Trial and Death of Socrates
+         2078    3.84          399  0140440399  good\_reads:book  https://www.goodreads.com/author/show/957.Thuc{\ldots}  -411.0  /genres/history|/genres/classics|/genres/non-f{\ldots}  dir21/261243.The\_History\_of\_the\_Peloponnesian\_{\ldots}        17212  The History of the Peloponnesian War
+         2527    3.94          506  0140449086  good\_reads:book  https://www.goodreads.com/author/show/901.Hero{\ldots}  -440.0  /genres/history|/genres/classics|/genres/non-f{\ldots}                      dir26/1362.The\_Histories.html        20570                         The Histories
+         3133    4.30          131  0872203492  good\_reads:book    https://www.goodreads.com/author/show/879.Plato  -400.0  /genres/philosophy|/genres/classics|/genres/no{\ldots}                     dir32/9462.Complete\_Works.html         7454                        Complete Works
+         3274    3.88          411  0140449493  good\_reads:book  https://www.goodreads.com/author/show/2192.Ari{\ldots}  -350.0  /genres/philosophy|/genres/classics|/genres/no{\ldots}            dir33/19068.The\_Nicomachean\_Ethics.html        16534                The Nicomachean Ethics
+         3757    3.82          364  0872206033  good\_reads:book  https://www.goodreads.com/author/show/1011.Ari{\ldots}  -411.0  /genres/plays|/genres/classics|/genres/drama|/{\ldots}                         dir38/1591.Lysistrata.html        18070                            Lysistrata
+         4402    3.99          516  0140449272  good\_reads:book    https://www.goodreads.com/author/show/879.Plato  -370.0  /genres/non-fiction|/genres/classics|/genres/p{\ldots}                     dir45/81779.The\_Symposium.html        18457                         The Symposium
+         4475    4.11          281  0865163480  good\_reads:book    https://www.goodreads.com/author/show/879.Plato  -390.0  /genres/philosophy|/genres/classics|/genres/no{\ldots}                           dir45/73945.Apology.html        11478                               Apology
+         5367    4.07          133  0872206335  good\_reads:book    https://www.goodreads.com/author/show/879.Plato  -360.0  /genres/philosophy|/genres/classics|/genres/no{\ldots}                    dir54/30292.Five\_Dialogues.html         9964                        Five Dialogues
+\end{Verbatim}
+            
+    If you want to combine these conditions, use the second form and put
+'()' brackets around each condition. The query uses a boolean AND. Each
+condition ceates a mask of trues and falses.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{df}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{year} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{rating} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{]}\PY{c+c1}{\PYZsh{}there were none greater than 4.5!}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}       rating review\_count        isbn         booktype                                         author\_url   year                                         genre\_urls                                               dir rating\_count                             name
+         246     4.01          365  0147712556  good\_reads:book    https://www.goodreads.com/author/show/903.Homer -800.0  /genres/classics|/genres/fantasy|/genres/mytho{\ldots}             dir03/1375.The\_Iliad\_The\_Odyssey.html        35123            The Iliad/The Odyssey
+         746     4.06         1087  0140449183  good\_reads:book  https://www.goodreads.com/author/show/5158478{\ldots} -500.0  /genres/classics|/genres/spirituality|/genres/{\ldots}                dir08/99944.The\_Bhagavad\_Gita.html        31634                The Bhagavad Gita
+         1397    4.03          890  0192840509  good\_reads:book  https://www.goodreads.com/author/show/12452.Aesop -560.0  /genres/classics|/genres/childrens|/genres/lit{\ldots}                   dir14/21348.Aesop\_s\_Fables.html        71259                   Aesop's Fables
+         1882    4.02          377  0872205541  good\_reads:book    https://www.goodreads.com/author/show/879.Plato -400.0  /genres/philosophy|/genres/classics|/genres/no{\ldots}  dir19/22632.The\_Trial\_and\_Death\_of\_Socrates.html        18712  The Trial and Death of Socrates
+         3133    4.30          131  0872203492  good\_reads:book    https://www.goodreads.com/author/show/879.Plato -400.0  /genres/philosophy|/genres/classics|/genres/no{\ldots}                    dir32/9462.Complete\_Works.html         7454                   Complete Works
+         4475    4.11          281  0865163480  good\_reads:book    https://www.goodreads.com/author/show/879.Plato -390.0  /genres/philosophy|/genres/classics|/genres/no{\ldots}                          dir45/73945.Apology.html        11478                          Apology
+         5367    4.07          133  0872206335  good\_reads:book    https://www.goodreads.com/author/show/879.Plato -360.0  /genres/philosophy|/genres/classics|/genres/no{\ldots}                   dir54/30292.Five\_Dialogues.html         9964                   Five Dialogues
+\end{Verbatim}
+            
+    \subsubsection{Cleaning}\label{cleaning}
+
+    We first check the datatypes. Notice that \texttt{review\_count},
+\texttt{rating\_count} are of type \texttt{object} (which means they are
+either strings or Pandas couldnt figure what they are), while
+\texttt{year} is a float.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} rating          float64
+         review\_count     object
+         isbn             object
+         booktype         object
+         author\_url       object
+         year            float64
+         genre\_urls       object
+         dir              object
+         rating\_count     object
+         name             object
+         dtype: object
+\end{Verbatim}
+            
+    Suppose we try and fix this
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{rating\PYZus{}count}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{review\PYZus{}count}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{year}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ValueError                                Traceback (most recent call last)
+
+        <ipython-input-19-2b400368004f> in <module>()
+    ----> 1 df['rating\_count']=df.rating\_count.astype(int)
+          2 df['review\_count']=df.review\_count.astype(int)
+          3 df['year']=df.year.astype(int)
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/util/\_decorators.py in wrapper(*args, **kwargs)
+        175                 else:
+        176                     kwargs[new\_arg\_name] = new\_arg\_value
+    --> 177             return func(*args, **kwargs)
+        178         return wrapper
+        179     return \_deprecate\_kwarg
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py in astype(self, dtype, copy, errors, **kwargs)
+       4995             \# else, only a single dtype is given
+       4996             new\_data = self.\_data.astype(dtype=dtype, copy=copy, errors=errors,
+    -> 4997                                          **kwargs)
+       4998             return self.\_constructor(new\_data).\_\_finalize\_\_(self)
+       4999 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/internals.py in astype(self, dtype, **kwargs)
+       3712 
+       3713     def astype(self, dtype, **kwargs):
+    -> 3714         return self.apply('astype', dtype=dtype, **kwargs)
+       3715 
+       3716     def convert(self, **kwargs):
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/internals.py in apply(self, f, axes, filter, do\_integrity\_check, consolidate, **kwargs)
+       3579 
+       3580             kwargs['mgr'] = self
+    -> 3581             applied = getattr(b, f)(**kwargs)
+       3582             result\_blocks = \_extend\_blocks(applied, result\_blocks)
+       3583 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/internals.py in astype(self, dtype, copy, errors, values, **kwargs)
+        573     def astype(self, dtype, copy=False, errors='raise', values=None, **kwargs):
+        574         return self.\_astype(dtype, copy=copy, errors=errors, values=values,
+    --> 575                             **kwargs)
+        576 
+        577     def \_astype(self, dtype, copy=False, errors='raise', values=None,
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/internals.py in \_astype(self, dtype, copy, errors, values, klass, mgr, **kwargs)
+        662 
+        663                 \# \_astype\_nansafe works fine with 1-d only
+    --> 664                 values = astype\_nansafe(values.ravel(), dtype, copy=True)
+        665                 values = values.reshape(self.shape)
+        666 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/dtypes/cast.py in astype\_nansafe(arr, dtype, copy)
+        707         \# work around NumPy brokenness, \#1987
+        708         if np.issubdtype(dtype.type, np.integer):
+    --> 709             return lib.astype\_intsafe(arr.ravel(), dtype).reshape(arr.shape)
+        710 
+        711         \# if we have a datetime/timedelta array of objects
+
+
+        pandas/\_libs/lib.pyx in pandas.\_libs.lib.astype\_intsafe()
+
+
+        pandas/\_libs/src/util.pxd in util.set\_value\_at\_unsafe()
+
+
+        ValueError: invalid literal for int() with base 10: 'None'
+
+    \end{Verbatim}
+
+    Oppos we got an error. Something is not right. Its trying to convert
+some python datatype: \texttt{None} into an int. This usually means data
+was missing. Was it?
+
+    We check for each of the column for null values.. Rating count and
+review count comes out to be clean, but there's a problem with year
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{rating\PYZus{}count}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} Empty DataFrame
+         Columns: [rating, review\_count, isbn, booktype, author\_url, year, genre\_urls, dir, rating\_count, name]
+         Index: []
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{review\PYZus{}count}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} Empty DataFrame
+         Columns: [rating, review\_count, isbn, booktype, author\_url, year, genre\_urls, dir, rating\_count, name]
+         Index: []
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{year}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:}       rating review\_count        isbn         booktype                                         author\_url  year                                         genre\_urls                                                dir rating\_count                                               name
+         2442    4.23          526         NaN  good\_reads:book  https://www.goodreads.com/author/show/623606.A{\ldots}   NaN  /genres/religion|/genres/islam|/genres/non-fic{\ldots}                       dir25/1301625.La\_Tahzan.html         4134                                          La Tahzan
+         2869    4.61            2         NaN  good\_reads:book  https://www.goodreads.com/author/show/8182217{\ldots}   NaN                                                NaN  dir29/22031070-my-death-experiences---a-preach{\ldots}           23  My Death Experiences - A Preacherâs 18 Apoca{\ldots}
+         3643     NaN         None        None             None                                               None   NaN                                                NaN                    dir37/9658936-harry-potter.html         None                                               None
+         5282     NaN         None        None             None                                               None   NaN                                                NaN                       dir53/113138.The\_Winner.html         None                                               None
+         5572    3.71           35  8423336603  good\_reads:book  https://www.goodreads.com/author/show/285658.E{\ldots}   NaN                                    /genres/fiction  dir56/890680.\_rase\_una\_vez\_el\_amor\_pero\_tuve\_q{\ldots}          403  Ãrase una vez el amor pero tuve que matarlo. {\ldots}
+         5658    4.32           44         NaN  good\_reads:book  https://www.goodreads.com/author/show/25307.Ro{\ldots}   NaN  /genres/fantasy|/genres/fantasy|/genres/epic-f{\ldots}  dir57/5533041-assassin-s-apprentice-royal-assa{\ldots}         3850  Assassin's Apprentice / Royal Assassin (Farsee{\ldots}
+         5683    4.56          204         NaN  good\_reads:book  https://www.goodreads.com/author/show/3097905{\ldots}   NaN  /genres/fantasy|/genres/young-adult|/genres/ro{\ldots}                  dir57/12474623-tiger-s-dream.html          895                 Tiger's Dream (The Tiger Saga, \#5)
+\end{Verbatim}
+            
+    Aha, we had some incomplete data. Lets get rid of it
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{year}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{n}{df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} (5993, 10)
+\end{Verbatim}
+            
+    We removed those 7 rows. Lets try the type conversion again
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{rating\PYZus{}count}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{review\PYZus{}count}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{year}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} rating          float64
+         review\_count      int64
+         isbn             object
+         booktype         object
+         author\_url       object
+         year              int64
+         genre\_urls       object
+         dir              object
+         rating\_count      int64
+         name             object
+         dtype: object
+\end{Verbatim}
+            
+    Much cleaner now!
+
+    \subsubsection{Visualizing}\label{visualizing}
+
+Pandas has handy built in visualization.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{df}\PY{o}{.}\PY{n}{rating}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_54_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can do this in more detail, plotting against a mean, with cutom
+binsize or number of bins. Note how to label axes and create legends.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}context}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{notebook}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{meanrat}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{rating}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}you can get means and medians in different ways}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{meanrat}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{rating}\PY{p}{)}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{rating}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{k}{with} \PY{n}{sns}\PY{o}{.}\PY{n}{axes\PYZus{}style}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{whitegrid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{df}\PY{o}{.}\PY{n}{rating}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}\PY{p}{;}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{meanrat}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{average rating of book}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Counts}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ratings Histogram}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}sns.despine()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+4.041997330218587 4.041997330218587 4.05
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_56_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    One can see the sparseness of review counts. This will be important when
+we learn about recommendations: we'll have to \emph{regularize} our
+models to deal with it.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{df}\PY{o}{.}\PY{n}{review\PYZus{}count}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{40000}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a23181668>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The structure may be easier to see if we rescale the x-axis to be
+logarithmic.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{df}\PY{o}{.}\PY{n}{review\PYZus{}count}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Here we make a scatterplot in matplotlib of rating against year. By
+setting the alpha transparency low we can how the density of highly
+rated books on goodreads has changed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{year}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{rating}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.08}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1900}\PY{p}{,}\PY{l+m+mi}{2010}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} Text(0,0.5,'Rating')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Pythons and ducks}\label{pythons-and-ducks}
+
+Notice that we used the series in the x-list and y-list slots in the
+\texttt{scatter} function in the \texttt{plt} module.
+
+In working with python I always remember: a python is a duck.
+
+What I mean is, python has a certain way of doing things. For example
+lets call one of these ways listiness. Listiness works on lists,
+dictionaries, files, and a general notion of something called an
+iterator.
+
+A Pandas series plays like a python list:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{alist}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+    We can construct another list by using the syntax below, also called a
+list comprehension.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{asquaredlist}\PY{o}{=}\PY{p}{[}\PY{n}{i}\PY{o}{*}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{alist}\PY{p}{]}
+         \PY{n}{asquaredlist}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} [1, 4, 9, 16, 25]
+\end{Verbatim}
+            
+    And then we can again make a scatterplot
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{alist}\PY{p}{,} \PY{n}{asquaredlist}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{alist}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'list'>
+
+    \end{Verbatim}
+
+    In other words, something is a duck if it quacks like a duck. A Pandas
+series quacks like a python list. They both support something called the
+iterator protocol, an notion of behaving in a "listy" way. And Python
+functions like \texttt{plt.scatter} will accept anything that behaves
+listy. Indeed here's one more example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{rating\PYZus{}count}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{rating\PYZus{}count}\PY{p}{)}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{rating\PYZus{}count}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.series.Series'> <class 'numpy.ndarray'>
+
+    \end{Verbatim}
+
+    Series and numpy lists behave similarly as well.
+
+\subsubsection{Vectorization}\label{vectorization}
+
+Numpy arrays are a bit different from regular python lists, and are the
+bread and butter of data science. Pandas Series are built atop them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{alist} \PY{o}{+} \PY{n}{alist}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{alist}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} array([1, 2, 3, 4, 5])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{alist}\PY{p}{)}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{alist}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:} array([ 2,  4,  6,  8, 10])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{alist}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} array([ 1,  4,  9, 16, 25])
+\end{Verbatim}
+            
+    In other words, operations on numpy arrays, and by extension, Pandas
+Series, are \textbf{vectorized}. You can add two numpy lists by just
+using \texttt{+} whereas the result isnt what you might expect for
+regular python lists. To add regular python lists elementwise, you will
+need to use a loop:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{newlist}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{alist}\PY{p}{:}
+             \PY{n}{newlist}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{item}\PY{o}{+}\PY{n}{item}\PY{p}{)}
+         \PY{n}{newlist}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} [2, 4, 6, 8, 10]
+\end{Verbatim}
+            
+    \textbf{Vectorization} is a powerful idiom, and we will use it a lot in
+this class. And, for almost all data intensive computing, we will use
+numpy arrays rather than python lists, as the python numerical stack is
+based on it.
+
+You have seen this in idea in spreadsheets where you add an entire
+column to another one.
+
+Two final examples
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{a}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+         \PY{n}{b}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{a}\PY{o}{*}\PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'numpy.ndarray'>
+[ 1  4  9 16 25]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{a}\PY{o}{+}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} array([2, 3, 4, 5, 6])
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
